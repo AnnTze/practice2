@@ -28,7 +28,6 @@ public class BookDBAO {
 
 
     private BookDetails createDummyBook(String bookId){
-
         BookDetails details = new BookDetails();
         details.setBookId(bookId);
         details.setDescription("Web components for developers talks about how web components can transfer the way you develop application for the web");
