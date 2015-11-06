@@ -3,6 +3,8 @@ package demo;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.*;
+import java.util.Random;
 
 /**
  * Created by chitboon on 10/23/15.
@@ -80,5 +82,13 @@ public class BookDBAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    private Random random = new Random();
+
+    public BookDetails getBook(){
+        List<BookDetails> list = getAllBook();
+        int i = random.nextInt(list.size());
+        return list.get(i);
     }
 }
