@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Created by tananntze on 31/10/2015.
+ * Created by chitboon on 10/22/15.
  */
 @WebServlet(name = "HomeServlet", urlPatterns = "/bookstore")
 public class HomeServlet extends HttpServlet {
@@ -18,16 +18,21 @@ public class HomeServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        out.println(getContent());
-        out.close();
+        try {
+            PrintWriter out = response.getWriter();
+            out.println(getContent());
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ServletException(e);
+        }
     }
 
-    private String getContent(){
+    private String getContent() throws Exception {
         BookDBAO db = new BookDBAO();
-        BookDetails bd = db.getBookDeatails("203");
+        BookDetails bd = db.getBookDetails("203");
         StringBuilder buffer = new StringBuilder();
-        buffer.append("<html>" + "<head><title>Duke's Bookstore </title></head>");
+        buffer.append("<html>" + "<head><title>Duke's Bookstore</title></head>");
         buffer.append("<body  bgcolor=\"#ffffff\">" + "<center>" +
                 "<hr> <br> &nbsp;" + "<h1>" +
                 "<font size=\"+3\" color=\"#CC0066\">Duke's </font> <img src=\"" +
@@ -44,6 +49,7 @@ public class HomeServlet extends HttpServlet {
                 "bookcatalog" +
                 "\"><b>Start Shopping</b></a></font><br>" +
                 "<br> &nbsp;<br> &nbsp;<br> &nbsp;</body></html>");
+
         return buffer.toString();
     }
 }
